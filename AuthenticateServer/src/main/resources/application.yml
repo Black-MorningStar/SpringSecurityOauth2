@@ -1,0 +1,17 @@
+server:
+  port: 8888
+
+clients:
+  config:
+    - clientId: c1
+      secret: 123
+      resourceId: resource01
+      grantType: authorization_code,password,client_credentials,implicit,refresh_token
+      scope: all,admin
+      redirectUri: http://www.baidu.com
+    - clientId: c2
+      secret: 123
+      resourceId: resource01
+      grantType: authorization_code,password,client_credentials,implicit,refresh_token
+      scope: all,admin
+      redirectUri: http://www.baidu.com

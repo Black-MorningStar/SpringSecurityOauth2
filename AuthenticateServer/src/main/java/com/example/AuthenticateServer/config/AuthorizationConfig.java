@@ -1,5 +1,6 @@
 package com.example.AuthenticateServer.config;
 
+import com.example.AuthenticateServer.service.MyClientDetailsService;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -39,7 +40,7 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 
     //自动注入下面配置的客户端注册信息
     @Autowired
-    private ClientDetailsService clientDetailsService;
+    private MyClientDetailsService clientDetailsService;
 
     @Autowired
     private AuthenticationManager providerManager;
@@ -73,7 +74,6 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory().withClient()
         clients.withClientDetails(clientDetailsService);
     }
 

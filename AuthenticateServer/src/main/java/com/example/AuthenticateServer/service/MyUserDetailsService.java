@@ -7,6 +7,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
+ * 自定义用户信息Service
+ * 密码需要用Encoder加密
+ *
  * @author 君墨笑
  * @date 2023/3/9
  */

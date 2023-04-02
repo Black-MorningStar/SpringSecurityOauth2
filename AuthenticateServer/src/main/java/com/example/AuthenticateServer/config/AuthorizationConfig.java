@@ -41,7 +41,7 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
     //自动注入下面配置的客户端注册信息
     @Autowired
     private MyClientDetailsService clientDetailsService;
-
+    //自动注入自定义的认证管理器
     @Autowired
     private AuthenticationManager providerManager;
 
@@ -68,6 +68,7 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
     /**
      * 配置客户端注册信息 ClientDetailsService
      * 哪些客户端可以来请求授权服务获得授权码+token
+     * 此处自定义客户端Service，从配置文件中获取
      *
      * @param clients
      * @throws Exception

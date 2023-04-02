@@ -44,25 +44,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return http.build();
     }*/
 
+    /**
+     * 配置Spring Security
+     * Oauth2.0需要配合Security一起工作
+     *
+     * @param http
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)//使用Session来存储认证后的用户信息
                 .and()
                 .authorizeRequests(authorize -> authorize
                         .anyRequest().authenticated()
                 )
-                .formLogin();
+                .formLogin(); //使用默认的基本表单登录以及Session管理认证信息
     }
 
 
+    //自定义认证管理器覆盖原本的
     @Override
     protected AuthenticationManager authenticationManager() throws Exception {
         return providerManager();
     }
 
     @Bean
-    public UserDetailsService userDetailsService() {
+    public UserDetailsService userDetailsServices() {
         return new MyUserDetailsService();
     }
 
@@ -79,7 +87,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService());
+        provider.setUserDetailsService(userDetailsServices());
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
